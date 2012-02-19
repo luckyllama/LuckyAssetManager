@@ -1,0 +1,4 @@
+﻿.master2 { color: green; }
+
+.url-test3 { width: 100px;height: 20px;background: url(../Content/images/test3.png); }
+.url-test4 { width: 100px;height: 20px;background: url(/images/test4.png); }

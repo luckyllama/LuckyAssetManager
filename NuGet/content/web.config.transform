@@ -1,0 +1,44 @@
+<configuration>
+  <configSections>
+    <sectionGroup name="lucky">
+      <section name="assetManager" type="Lucky.AssetManager.Configuration.AssetManagerSettings" allowDefinition="Everywhere" allowLocation="true" />
+    </sectionGroup>
+  </configSections>
+
+  <lucky>
+    <assetManager debug="true">
+      <css>
+        <processors>
+          <!--RelativePathing must run before combining because combining loses the original paths of the files-->
+          <add name="RelativePathing" type="Lucky.AssetManager.Processors.CssRelativePathProcessor, Lucky.AssetManager" />
+          <add name="Combine" type="Lucky.AssetManager.Processors.CombineProcessor, Lucky.AssetManager" />
+          <add name="Minimize" type="Lucky.AssetManager.Processors.YuiMinimizeProcessor, Lucky.AssetManager" />
+        </processors>
+      </css>
+      <javascript alternateName="cdn">
+        <processors>
+          <add name="Combine" type="Lucky.AssetManager.Processors.CombineProcessor, Lucky.AssetManager" />
+          <add name="Minimize" type="Lucky.AssetManager.Processors.YuiMinimizeProcessor, Lucky.AssetManager" />
+        </processors>
+      </javascript>
+    </assetManager>
+  </lucky>
+  
+  <system.web>
+    <pages>
+      <namespaces>
+        <add namespace="Lucky.AssetManager.Web" />
+        <add namespace="Lucky.AssetManager" />
+      </namespaces>
+    </pages>
+    <httpHandlers>
+      <add verb="*" path="assets.axd" type="Lucky.AssetManager.Web.AssetsHandler" />
+    </httpHandlers>
+  </system.web>
+
+  <system.webServer>
+    <handlers>
+      <add name="AssetsHandler" verb="*" path="assets.axd" type="Lucky.AssetManager.Web.AssetsHandler"/>
+    </handlers>
+  </system.webServer>
+</configuration>

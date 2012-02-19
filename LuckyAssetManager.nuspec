@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>LuckyAssetManager</id>
+    <version>1.0.6</version>
+    <releaseNotes>
+      The assets hash should be more unique.
+    </releaseNotes>
+    <authors>frank hadder</authors>
+    <owners>frank hadder</owners>
+    <projectUrl>http://luckyassetmanager.codeplex.com/</projectUrl>
+    <licenseUrl>http://luckyassetmanager.codeplex.com/license</licenseUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/SourceControlFileDownload.ashx?ProjectName=luckyassetmanager&amp;changeSetId=3339f587bd3e&amp;itemId=NuGet%2fimages%2fIcon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      A css and javascript manager that will dynamically combine and minimize the files and serve them through a handler.
+    </description>
+    <tags>css javascript js minification minify combine mvc AssetManager</tags>
+    <dependencies>
+      <dependency id="YUICompressor.NET" version="1.5.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Lucky.AssetManager\bin\Release\Lucky.AssetManager.dll" target="lib\net40" />
+    <file src="NuGet\content\*" target="content" />
+  </files>
+</package>

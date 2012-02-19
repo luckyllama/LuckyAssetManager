@@ -1,0 +1,19 @@
+﻿@using Lucky.AssetManager.Web
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
+    Assets.Css("~/Content/master.css").Add();
+    Assets.Css("~/Content/home-index.css").Add();
+    Assets.Css("http://www.example.com/example.css").Remove();
+    Assets.Javascript("~/Scripts/jquery-1.5.1.js").Add();
+    Assets.Javascript("~/Scripts/jquery-ui-1.8.11.js").Add();
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>
+
+@Html.Partial("TestViewUserControl")

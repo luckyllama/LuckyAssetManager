@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucky.AssetManager.Example.Mvc", "Lucky.AssetManager.Example.Mvc\Lucky.AssetManager.Example.Mvc.csproj", "{95A14855-BE8C-41AB-972A-B80E28F5E9A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucky.AssetManager", "Lucky.AssetManager\Lucky.AssetManager.csproj", "{D6AAB65F-B7F9-478A-AB8A-1561E5A9B6BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucky.AssetManager.Tests", "Lucky.AssetManager.Tests\Lucky.AssetManager.Tests.csproj", "{D57C9F35-022D-4B7E-B63F-AC299452BE4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6933A864-BDDC-44E8-A0A7-5F11FEEA377E}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Lucky.AssetManager.vsmdi = Lucky.AssetManager.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{298FA4F6-A092-4316-99BA-79987D544016}"
+	ProjectSection(SolutionItems) = preProject
+		LuckyAssetManager.nuspec = LuckyAssetManager.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8226CC65-1291-40E7-90E8-643451C1601C}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\content\web.config.transform = NuGet\content\web.config.transform
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Lucky.AssetManager.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95A14855-BE8C-41AB-972A-B80E28F5E9A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95A14855-BE8C-41AB-972A-B80E28F5E9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95A14855-BE8C-41AB-972A-B80E28F5E9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95A14855-BE8C-41AB-972A-B80E28F5E9A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6AAB65F-B7F9-478A-AB8A-1561E5A9B6BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6AAB65F-B7F9-478A-AB8A-1561E5A9B6BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6AAB65F-B7F9-478A-AB8A-1561E5A9B6BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6AAB65F-B7F9-478A-AB8A-1561E5A9B6BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D57C9F35-022D-4B7E-B63F-AC299452BE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57C9F35-022D-4B7E-B63F-AC299452BE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57C9F35-022D-4B7E-B63F-AC299452BE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57C9F35-022D-4B7E-B63F-AC299452BE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8226CC65-1291-40E7-90E8-643451C1601C} = {298FA4F6-A092-4316-99BA-79987D544016}
+	EndGlobalSection
+EndGlobal

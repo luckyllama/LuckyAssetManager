@@ -1,0 +1,73 @@
+﻿@using Lucky.AssetManager.Web
+@using Lucky.AssetManager
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    
+    @{Assets.Css("~/Content/Site.css", "Special").Add();}
+    
+    @Assets.RenderCss(assetGroup: "Special")
+
+    @{
+        Assets.MasterCss("~/Content/master.css").Add();
+        Assets.MasterCss("~/Content/master.print.css").ForMediaType("print").Add();
+        Assets.MasterCss("~/Content/master2.css").IgnoreProcessing().Add();
+        Assets.MasterCss("~/Content/ie7.css").ForIE(IE.Equality.EqualTo, IE.Version.IE7).Add();
+        Assets.Css("http://www.example.com/example.css").Add();
+    }
+    
+    @Assets.RenderCss()
+    
+    @{Assets.MasterJavascript("~/Scripts/modernizr-1.7.min.js", "Header").Add();}
+
+    @Assets.RenderJavascript(assetGroup: "Header")
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div id="title">
+                <h1>My MVC Application</h1>
+            </div>
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div>
+            <nav>
+                <ul id="menu">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                </ul>
+            </nav>
+        </header>
+        <section id="main">
+            @RenderBody()
+
+            <div class="master load-test">master.css loaded</div>
+            <div class="master2 load-test">master2.css loaded</div>
+            <div class="ie7 load-test">ie7.css loaded</div>
+            <div class="master-print load-test">master.print.css loaded</div>
+            <div class="home-index load-test">home-index.css loaded</div>
+            <div class="test-user-control-1 load-test">test-user-control-1.css loaded</div>
+            <div class="site load-test">Site.css loaded</div>
+
+            <div class="url-test1"></div>
+            <div class="url-test2"></div>
+            <div class="url-test3"></div>
+            <div class="url-test4"></div>
+        </section>
+        <footer>
+        </footer>
+    </div>
+
+    @{
+        Assets.MasterJavascript("~/Scripts/jquery-1.5.1.js").WithAlternatePath("cdn", "http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.5.1.js").Add();
+        Assets.MasterJavascript("~/Scripts/jquery-ui-1.8.11.js").Add();
+        Assets.MasterJavascript("~/Scripts/jquery.unobtrusive-ajax.js").Add();
+        Assets.MasterJavascript("~/Scripts/jquery.validate.js").Add();
+        Assets.MasterJavascript("~/Scripts/jquery.validate.unobtrusive.js").Add();
+    }
+
+    @Assets.RenderJavascript()
+</body>
+</html>
