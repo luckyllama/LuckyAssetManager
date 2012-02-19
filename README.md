@@ -1,6 +1,14 @@
-This project is currently in a very early state of development. More details to follow.
+![logo](https://github.com/luckyllama/LuckyAssetManager/raw/master/Resources/Logo.png)
 
-# Example Usage (Mvc3 / Razor)
+## Install
+
+It's easiest to install via nuget. 
+
+Run the following command in the Package Manager Console
+
+    PM> Install-Package LuckyAssetManager
+
+## Example Usage (Mvc3 / Razor)
 
 In the _layout.cshtml: 
 
@@ -44,7 +52,7 @@ And in any .cshtml file (page or partial):
   
 The method Assets.MasterCss is only slightly different than the method Assets.Css. The former is simply always rendered before the latter. This insures the correct ordering is preserved since the .net engine actually renders the aspx page first, then any user controls, then the master page last.
 
-## Output
+### Output
 
 With both combining and minimization off: 
 
