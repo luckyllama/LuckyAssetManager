@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
+using System.Web.Caching;
 using Lucky.AssetManager.Processors;
 
 namespace Lucky.AssetManager.Configuration {
@@ -15,6 +16,32 @@ namespace Lucky.AssetManager.Configuration {
         [ConfigurationProperty("debug", DefaultValue = false, IsRequired = false)]
         public bool Debug {
             get { return (bool) this["debug"]; }
+        }
+        [ConfigurationProperty("cacheFactoryType", DefaultValue = null, IsRequired = false)]
+        public string CacheFactoryType {
+            get {
+                return this["cacheFactoryType"] as string;
+            }
+        }
+        public ICacheFactory CacheFactory {
+            get {
+                if (!string.IsNullOrWhiteSpace(CacheFactoryType)) {
+                    var type = CacheFactoryType.Split(',');
+                    var assembly = Assembly.GetAssembly(typeof (ICacheFactory));
+                    if (type.Length > 2) {
+                        throw new ConfigurationErrorsException(
+                            "Malformed asset manager processor type. Format the string like 'Namespace.ClassName, AssemblyName'.");
+                    }
+                    if (type.Length == 2) {
+                        assembly = Assembly.Load(type[1]);
+                    }
+                    object o = assembly.CreateInstance(type[0]);
+                    if (o is ICacheFactory) {
+                        return o as ICacheFactory;
+                    }
+                }
+                return new MemoryCacheFactory();
+            }
         }
 
         [ConfigurationProperty("css")]

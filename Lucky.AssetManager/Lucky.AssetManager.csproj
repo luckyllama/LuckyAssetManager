@@ -71,6 +71,8 @@
     <Compile Include="Assets\JavascriptAsset.cs" />
     <Compile Include="Assets\Html\JavascriptHtmlBuilder.cs" />
     <Compile Include="Assets\AssetReaders\IAssetReader.cs" />
+    <Compile Include="Configuration\ICacheFactory.cs" />
+    <Compile Include="Configuration\MemoryCacheFactory.cs" />
     <Compile Include="Processors\CombineProcessor.cs" />
     <Compile Include="Processors\CssRelativePathProcessor.cs" />
     <Compile Include="Processors\IProcessor.cs" />

@@ -7,7 +7,7 @@ namespace Lucky.AssetManager.Web {
     public class AssetsHandler : IHttpHandler {
         private readonly ObjectCache _cache;
 
-        public AssetsHandler() : this(MemoryCache.Default) {}
+        public AssetsHandler() : this(AssetManager.Settings.CacheFactory.GetCache()) { }
         public AssetsHandler(ObjectCache cache) {
             _cache = cache;
         }

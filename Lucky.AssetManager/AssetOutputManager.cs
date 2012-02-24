@@ -21,14 +21,13 @@ namespace Lucky.AssetManager {
         private readonly IHtmlBuilder _htmlBuilder;
         private readonly IEnumerable<IProcessor> _processors;
         private readonly IAssetManagerSettings _settings;
+        private readonly ObjectCache _cache; 
 
         public AssetOutputManager(IHtmlBuilder htmlBuilder, IEnumerable<IProcessor> processors, IAssetManagerSettings settings) {
             _htmlBuilder = htmlBuilder;
             _settings = settings;
-            _processors = processors;
-            if (_processors == null) {
-                _processors = new List<IProcessor>();
-            }
+            _processors = processors ?? new List<IProcessor>();
+            _cache = AssetManager.Settings.CacheFactory.GetCache();
         }
 
         public string BuildHtml(IEnumerable<IAsset> assets) {
@@ -55,10 +54,10 @@ namespace Lucky.AssetManager {
             return result.ToString();
         }
 
-        private static string CacheContent(IAsset asset) {
+        private string CacheContent(IAsset asset) {
             var key = asset.GetHashCode().ToString(CultureInfo.InvariantCulture);
-            if (MemoryCache.Default.Contains(key) == false) {
-                MemoryCache.Default.Add(new CacheItem(key, asset.Reader.Content), asset.Reader.CacheItemPolicy);
+            if (_cache.Contains(key) == false) {
+                _cache.Add(new CacheItem(key, asset.Reader.Content), asset.Reader.CacheItemPolicy);
             }
             return key;
         }
