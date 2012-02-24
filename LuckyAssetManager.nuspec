@@ -1,22 +1,25 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-	<metadata>
-		<id>LuckyAssetManager</id>
-		<version>1.0.7</version>
-		<authors>frank hadder</authors>
-		<owners>frank hadder</owners>
-		<projectUrl>https://github.com/luckyllama/LuckyAssetManager</projectUrl>
-		<licenseUrl>https://raw.github.com/luckyllama/LuckyAssetManager/master/license.txt</licenseUrl>
-		<iconUrl>https://github.com/luckyllama/LuckyAssetManager/raw/master/NuGet/images/Icon.png</iconUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>A css and javascript manager that will dynamically combine and minimize the files and serve them through a handler.</description>
-		<tags>css javascript js minification minify combine mvc AssetManager</tags>
-		<dependencies>
-			<dependency id="YUICompressor.NET" version="1.5.0.0" />
-		</dependencies>
-	</metadata>
-	<files>
-		<file src="Lucky.AssetManager\bin\Release\Lucky.AssetManager.dll" target="lib\net40" />
-		<file src="NuGet\content\*" target="content" />
-	</files>
+  <metadata>
+    <id>LuckyAssetManager</id>
+    <version>1.10.0</version>
+    <releaseNotes>
+      Added a configuration option to use a custom caching provider. 
+    </releaseNotes>
+    <authors>frank hadder</authors>
+    <owners>frank hadder</owners>
+    <projectUrl>https://github.com/luckyllama/LuckyAssetManager</projectUrl>
+    <licenseUrl>https://raw.github.com/luckyllama/LuckyAssetManager/master/license.txt</licenseUrl>
+    <iconUrl>https://github.com/luckyllama/LuckyAssetManager/raw/master/NuGet/images/Icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A css and javascript manager that will dynamically combine and minimize the files and serve them through a handler.</description>
+    <tags>css javascript js minification minify combine mvc AssetManager</tags>
+    <dependencies>
+      <dependency id="YUICompressor.NET" version="1.5.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Lucky.AssetManager\bin\Release\Lucky.AssetManager.dll" target="lib\net40" />
+    <file src="NuGet\content\*" target="content" />
+  </files>
 </package>
