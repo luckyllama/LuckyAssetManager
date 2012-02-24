@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
-using System.Web.Caching;
 using Lucky.AssetManager.Processors;
 
 namespace Lucky.AssetManager.Configuration {
