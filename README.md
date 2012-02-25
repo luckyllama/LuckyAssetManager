@@ -12,6 +12,7 @@ Run the following command in the Package Manager Console
 
 In the _layout.cshtml: 
 
+```html
     <head>
         @{Assets.Css("~/Content/site-special.css", "Special").Add();}
         
@@ -38,9 +39,11 @@ In the _layout.cshtml:
 
         @Assets.RenderJavascript()
     </body>
-  
+```
+
 And in any .cshtml file (page or partial): 
 
+```html
     <!-- place anywhere on the page -->
     @{
         Assets.Css("~/Content/site.css").Add();
@@ -49,13 +52,15 @@ And in any .cshtml file (page or partial):
         Assets.Javascript("~/Scripts/jquery-1.5.1.js").Add();
         Assets.Javascript("~/Scripts/jquery-ui-1.8.11.js").Add();
     }
-  
+```
+
 The method Assets.MasterCss is only slightly different than the method Assets.Css. The former is simply always rendered before the latter. This insures the correct ordering is preserved since the .net engine actually renders the aspx page first, then any user controls, then the master page last.
 
 ### Output
 
 With both combining and minimization off: 
 
+```html
     <head>
         <link href="/Content/site-special.css" media="all" rel="stylesheet" type="text/css" />
         <link href="/Content/site.css" media="all" rel="stylesheet" type="text/css" />
@@ -74,11 +79,13 @@ With both combining and minimization off:
         <script src="/Scripts/jquery.validate.js" type="text/javascript"></script>
         <script src="/Scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
     </body>
+```
 
 There are 12 http calls. Note there are no duplicates and the call to example.css was removed from the master page by a child page (or control). The total size of the javascript is __645.2 KB__.
 
 With combining on:
 
+```html
     <head>
         <link href="/Content/site-special.css" media="all" rel="stylesheet" type="text/css" />
         <link href="assets.axd?type=Css&key=1618531572" media="all" rel="stylesheet" type="text/css" />
@@ -90,11 +97,13 @@ With combining on:
     <body>
         <script src="assets.axd?type=Javascript&key=55890042" type="text/javascript"></script>
     </body>
+```
   
 There are now only 4 http calls. Note that similar groups are combined together but leaves css with a different media type or IE comment and css put into a different asset group are left out. If there's only one asset being rendered, it bypasses the http handler. 
 
 With combining and minimization on: 
 
+```html
     <head>
         <link href="assets.axd?type=Css&key=-1282283045" media="all" rel="stylesheet" type="text/css" />
         <link href="assets.axd?type=Css&key=1618531572" media="all" rel="stylesheet" type="text/css" />
@@ -106,6 +115,7 @@ With combining and minimization on:
     <body>
         <script src="assets.axd?type=Javascript&key=55890042" type="text/javascript"></script>
     </body>
+```
   
 There are still only 4 http calls but they are all being compressed. The javascript has been compressed to __340.5 KB__. A compression rate of __52.8%__.
 
@@ -119,16 +129,20 @@ You'll notice we added jQuery in the following way:
 
 If we edit the web.config and set an alternate path like so: 
 
+```xml
     <lucky>
         <assetManager debug="false">
             <css minimize="true" combine="true" />
             <javascript minimize="true" combine="true" alternateName="cdn" />
         </assetManager>
     </lucky>
+```
 
 Our html output will use the cdn instead of the local copy:
   
+```html
     <body>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.5.1.js" type="text/javascript"></script>
         <script src="assets.axd?type=Javascript&key=55890042" type="text/javascript"></script>
     </body>
+```
