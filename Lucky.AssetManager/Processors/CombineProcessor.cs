@@ -8,9 +8,10 @@ using Lucky.AssetManager.Assets.AssetReaders;
 namespace Lucky.AssetManager.Processors {
     public class CombineProcessor : IProcessor {
         public IEnumerable<IAsset> Process(IEnumerable<IAsset> assets) {
-            IEnumerable<IGrouping<IAssetKey, IAsset>> assetGroups = assets.Where(a => a.CurrentPathIsExternal == false && a.IgnoreProcessing == false).GroupBy(asset => asset.Key);
+            var results = assets.Where(a => !a.IsProcessable).ToList();
 
-            var results = assets.Where(a => a.CurrentPathIsExternal || a.IgnoreProcessing).ToList();
+            IEnumerable<IGrouping<IAssetKey, IAsset>> assetGroups = assets.Where(a => a.IsProcessable).GroupBy(asset => asset.Key);
+
             foreach (IGrouping<IAssetKey, IAsset> assetGroup in assetGroups) {
                 if (assetGroup.Count() == 1) {
                     results.Add(assetGroup.Single());

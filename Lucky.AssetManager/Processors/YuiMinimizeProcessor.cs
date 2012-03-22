@@ -7,8 +7,9 @@ namespace Lucky.AssetManager.Processors {
     public class YuiMinimizeProcessor : IProcessor {
         public IEnumerable<IAsset> Process(IEnumerable<IAsset> assets) {
 
-            var results = assets.Where(a => a.CurrentPathIsExternal || a.IgnoreProcessing).ToList();
-            foreach (IAsset asset in assets.Where(a => a.CurrentPathIsExternal == false && a.IgnoreProcessing == false)) {
+            var results = assets.Where(a => !a.IsProcessable).ToList();
+
+            foreach (IAsset asset in assets.Where(a => a.IsProcessable)) {
                 string newContent = asset.Reader.Content;
                 if (asset is CssAsset && string.IsNullOrEmpty(newContent) == false) {
                     newContent = Yahoo.Yui.Compressor.CssCompressor.Compress(newContent);

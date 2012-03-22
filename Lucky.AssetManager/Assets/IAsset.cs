@@ -17,5 +17,7 @@ namespace Lucky.AssetManager.Assets {
         string CurrentPath { get; }
         string CurrentFilePath { get; }
         bool CurrentPathIsExternal { get; }
+
+        bool IsProcessable { get; }
     }
 }

@@ -55,5 +55,8 @@ namespace Lucky.AssetManager.Assets {
             get { return CurrentPath.Contains("://"); }
         }
 
+        public bool IsProcessable {
+            get { return CurrentPathIsExternal == false && IgnoreProcessing == false; }
+        }
     }
 }

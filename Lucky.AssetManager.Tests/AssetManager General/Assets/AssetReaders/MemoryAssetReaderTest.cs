@@ -3,6 +3,7 @@ using Lucky.AssetManager.Assets.AssetReaders;
 using System.Collections.Generic;
 using NUnit.Framework;
 
+// ReSharper disable InconsistentNaming
 namespace Lucky.AssetManager.Tests.Assets.AssetReaders {
     
     /// <summary>
@@ -59,5 +60,37 @@ namespace Lucky.AssetManager.Tests.Assets.AssetReaders {
         }
 
         #endregion CacheItemPolicy
+
+        #region GetHashCode
+        
+        [Test]
+        public void GetHashCode_DifferentContent_ReturnsUnique() {
+            var paths1 = new List<string> { "patha.css", "pathb.css" };
+            var reader1 = new MemoryAssetReader(paths1, "content1");
+            var paths2 = new List<string> { "patha.css", "pathb.css" };
+            var reader2 = new MemoryAssetReader(paths2, "content2");
+            Assert.That(reader1.GetHashCode(), Is.Not.EqualTo(reader2.GetHashCode()));
+        }
+
+        [Test]
+        public void GetHashCode_DifferentPaths_ReturnsUnique() {
+            var paths1 = new List<string> { "patha.css", "pathb.css" };
+            var reader1 = new MemoryAssetReader(paths1, "content");
+            var paths2 = new List<string> { "patha.css", "pathc.css" };
+            var reader2 = new MemoryAssetReader(paths2, "content");
+            Assert.That(reader1.GetHashCode(), Is.Not.EqualTo(reader2.GetHashCode()));
+        }
+
+        [Test]
+        public void GetHashCode_SamePathAndContent_ReturnsIdentical() {
+            var paths1 = new List<string> { "patha.css", "pathb.css" };
+            var reader1 = new MemoryAssetReader(paths1, "content");
+            var paths2 = new List<string> { "patha.css", "pathb.css" };
+            var reader2 = new MemoryAssetReader(paths2, "content");
+            Assert.That(reader1.GetHashCode(), Is.EqualTo(reader2.GetHashCode()));
+        }
+
+        #endregion GetHashCode
     }
 }
+// ReSharper restore InconsistentNaming

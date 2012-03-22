@@ -11,12 +11,14 @@ namespace Lucky.AssetManager.Processors {
     internal class CssRelativePathProcessor : IProcessor {
 
         public IEnumerable<IAsset> Process(IEnumerable<IAsset> assets) {
-            var results = assets.Where(a => a.CurrentPathIsExternal || a is CssAsset == false || a.IgnoreProcessing).ToList();
-            foreach (IAsset asset in assets.Where(a => a.CurrentPathIsExternal == false && a is CssAsset && a.IgnoreProcessing == false)) {
+            var results = assets.Where(a => !a.IsProcessable || a is CssAsset == false).ToList();
+
+            foreach (IAsset asset in assets.Where(a => a.IsProcessable && a is CssAsset)) {
                 var newContent = Process(asset, asset.Reader.Content);
                 asset.Reader = new MemoryAssetReader(asset.Reader.AssociatedFilePaths, newContent );
                 results.Add(asset);
             }
+
             return results;
         }
 
