@@ -53,6 +53,7 @@ namespace Lucky.AssetManager.Assets {
             unchecked {
                 int result = (Path != null ? Path.GetHashCode() : 0);
                 result = (result * 71) ^ Key.GetHashCode();
+                result ^= Reader.GetHashCode();
                 return result;
             }
         }

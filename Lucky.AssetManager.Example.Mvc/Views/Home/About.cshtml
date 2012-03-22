@@ -1,5 +1,12 @@
-﻿@{
+﻿@using Lucky.AssetManager
+@using Lucky.AssetManager.Web
+@{
     ViewBag.Title = "About Us";
+}
+@{
+    Assets.MasterCss("~/Content/master.css").Add();
+    Assets.Css("~/Content/about.css").Add();
+    Assets.Javascript("~/Scripts/about-page.js").Add();
 }
 
 <h2>About</h2>

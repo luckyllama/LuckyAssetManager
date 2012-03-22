@@ -14,7 +14,6 @@
         Assets.MasterCss("~/Content/master.css").Add();
         Assets.MasterCss("~/Content/master.print.css").ForMediaType("print").Add();
         Assets.MasterCss("~/Content/master2.css").IgnoreProcessing().Add();
-        Assets.MasterCss("~/Content/ie7.css").ForIE(IE.Equality.EqualTo, IE.Version.IE7).Add();
         Assets.Css("http://www.example.com/example.css").Add();
     }
     
@@ -48,6 +47,7 @@
             <div class="ie7 load-test">ie7.css loaded</div>
             <div class="master-print load-test">master.print.css loaded</div>
             <div class="home-index load-test">home-index.css loaded</div>
+            <div class="about-index load-test">home-index.css loaded</div>
             <div class="test-user-control-1 load-test">test-user-control-1.css loaded</div>
             <div class="site load-test">Site.css loaded</div>
 
@@ -66,6 +66,7 @@
         Assets.MasterJavascript("~/Scripts/jquery.unobtrusive-ajax.js").Add();
         Assets.MasterJavascript("~/Scripts/jquery.validate.js").Add();
         Assets.MasterJavascript("~/Scripts/jquery.validate.unobtrusive.js").Add();
+        Assets.MasterJavascript("~/Scripts/master-page.js").Add();
     }
 
     @Assets.RenderJavascript()

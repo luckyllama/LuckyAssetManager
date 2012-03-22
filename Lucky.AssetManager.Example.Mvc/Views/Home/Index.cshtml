@@ -1,4 +1,5 @@
-﻿@using Lucky.AssetManager.Web
+﻿@using Lucky.AssetManager
+@using Lucky.AssetManager.Web
 @{
     ViewBag.Title = "Home Page";
 }
@@ -6,9 +7,11 @@
 @{
     Assets.Css("~/Content/master.css").Add();
     Assets.Css("~/Content/home-index.css").Add();
+    Assets.MasterCss("~/Content/ie7.css").ForIE(IE.Equality.EqualTo, IE.Version.IE7).Add();
     Assets.Css("http://www.example.com/example.css").Remove();
     Assets.Javascript("~/Scripts/jquery-1.5.1.js").Add();
     Assets.Javascript("~/Scripts/jquery-ui-1.8.11.js").Add();
+    Assets.Javascript("~/Scripts/home-page.js").Add();
 }
 
 <h2>@ViewBag.Message</h2>

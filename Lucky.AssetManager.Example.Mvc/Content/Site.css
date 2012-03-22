@@ -5,6 +5,7 @@ to use a different color start by replacing all instances of
 ----------------------------------------------------------*/
 .load-test { color: red; }
 .site { color: green; }
+.js-test { color: green; }
 
 body {
     background-color: #5c87b2;

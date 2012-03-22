@@ -72,8 +72,12 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\about-page.js" />
+    <Content Include="Scripts\home-page.js" />
+    <Content Include="Scripts\master-page.js" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\about.css" />
     <Content Include="Content\ie7.css" />
     <Content Include="Content\images\test1.png" />
     <Content Include="Content\images\test2.png" />
