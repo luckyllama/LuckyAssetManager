@@ -11,10 +11,9 @@ namespace Lucky.AssetManager.Processors {
     internal class CssRelativePathProcessor : IProcessor {
         private readonly IAbsoluteUrlManager _urlManager;
 
-        public CssRelativePathProcessor(IAbsoluteUrlManager urlManager = null) {
-            if (urlManager == null) {
-                urlManager = new AbsoluteUrlManager();
-            }
+        public CssRelativePathProcessor() : this(new AbsoluteUrlManager()) { }
+
+        public CssRelativePathProcessor(IAbsoluteUrlManager urlManager) {
             _urlManager = urlManager;
         }
 
