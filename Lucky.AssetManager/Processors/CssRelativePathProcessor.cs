@@ -9,6 +9,14 @@ using Lucky.AssetManager.Assets.AssetReaders;
 
 namespace Lucky.AssetManager.Processors {
     internal class CssRelativePathProcessor : IProcessor {
+        private readonly IAbsoluteUrlManager _urlManager;
+
+        public CssRelativePathProcessor(IAbsoluteUrlManager urlManager = null) {
+            if (urlManager == null) {
+                urlManager = new AbsoluteUrlManager();
+            }
+            _urlManager = urlManager;
+        }
 
         public IEnumerable<IAsset> Process(IEnumerable<IAsset> assets) {
             var results = assets.Where(a => !a.IsProcessable || a is CssAsset == false).ToList();
@@ -22,9 +30,9 @@ namespace Lucky.AssetManager.Processors {
             return results;
         }
 
-        private const string Regex = @"url\((?<quote>'?""?)(?<url>.*)""?'?\)";
+        private const string Regex = @"url\((?<quote>'?""?)(?<url>(?!http|/).*?)""?'?\)";
 
-        private static string Process(IAsset asset, string assetContent) {
+        private string Process(IAsset asset, string assetContent) {
             var urlRegex = new Regex(Regex, RegexOptions.IgnoreCase);
             return urlRegex.Replace(assetContent, m => {
                                                       var result = m.Groups[0].Value;
@@ -35,14 +43,25 @@ namespace Lucky.AssetManager.Processors {
                                                           if (m.Groups["quote"].Success) {
                                                               result += m.Groups["quote"].Value;
                                                           }
-                                                          result += ToAbsoluteUrl(asset.CurrentPath, urlValue) + ")";
+                                                          result += _urlManager.GetAbsoluteUrl(asset.CurrentPath, urlValue);
+                                                          if (m.Groups["quote"].Success) {
+                                                              result += m.Groups["quote"].Value;
+                                                          }
+                                                          result += ")";
                                                       }
 
                                                       return result;
                                                   });
         }
 
-        private static string ToAbsoluteUrl(string path, string relativeUrl) {
+    }
+
+    public interface IAbsoluteUrlManager {
+        string GetAbsoluteUrl(string path, string relativeUrl);
+    }
+
+    public class AbsoluteUrlManager : IAbsoluteUrlManager {
+        public string GetAbsoluteUrl(string path, string relativeUrl) {
             var fromUri = new Uri(HttpContext.Current.Server.MapPath("~/"));
             var toUri = new Uri(new FileInfo(HttpContext.Current.Server.MapPath(path)).DirectoryName);
 
@@ -60,6 +79,5 @@ namespace Lucky.AssetManager.Processors {
 
             return string.Format("{0}://{1}{2}/{3}/{4}", url.Scheme, url.Host, port, fromUri.MakeRelativeUri(toUri), relativeUrl);
         }
-
     }
 }
