@@ -29,7 +29,7 @@ namespace Lucky.AssetManager.Processors {
             return results;
         }
 
-        private const string Regex = @"url\((?<quote>'?""?)(?<url>(?!http|/).*?)""?'?\)";
+        private const string Regex = @"url\((?<quote>'?""?)(?<url>.*?)""?'?\)";
 
         private string Process(IAsset asset, string assetContent) {
             var urlRegex = new Regex(Regex, RegexOptions.IgnoreCase);
@@ -42,7 +42,12 @@ namespace Lucky.AssetManager.Processors {
                                                           if (m.Groups["quote"].Success) {
                                                               result += m.Groups["quote"].Value;
                                                           }
-                                                          result += _urlManager.GetAbsoluteUrl(asset.CurrentPath, urlValue);
+                                                          if (urlValue.StartsWith("http") || urlValue.StartsWith("/")) {
+                                                              result += urlValue;
+                                                          }
+                                                          else {
+                                                              result += _urlManager.GetAbsoluteUrl(asset.CurrentPath, urlValue);
+                                                          }
                                                           if (m.Groups["quote"].Success) {
                                                               result += m.Groups["quote"].Value;
                                                           }
