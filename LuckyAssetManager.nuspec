@@ -4,7 +4,7 @@
     <id>LuckyAssetManager</id>
     <version>1.10.3</version>
     <releaseNotes>
-      Bug fix https://github.com/luckyllama/LuckyAssetManager/issues/7, debug now defaults to false
+      Bug fix https://github.com/luckyllama/LuckyAssetManager/issues/7, debug mode now defaults to false
     </releaseNotes>
     <authors>frank hadder</authors>
     <owners>frank hadder</owners>
