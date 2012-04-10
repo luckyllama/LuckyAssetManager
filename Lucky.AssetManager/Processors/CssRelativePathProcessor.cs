@@ -37,15 +37,14 @@ namespace Lucky.AssetManager.Processors {
                                                       var result = m.Groups[0].Value;
 
                                                       if (m.Groups["url"].Success) {
-                                                          var urlValue = m.Groups["url"].Value.TrimStart('/');
+                                                          var urlValue = m.Groups["url"].Value;
                                                           result = "url(";
                                                           if (m.Groups["quote"].Success) {
                                                               result += m.Groups["quote"].Value;
                                                           }
                                                           if (urlValue.StartsWith("http") || urlValue.StartsWith("/")) {
                                                               result += urlValue;
-                                                          }
-                                                          else {
+                                                          } else {
                                                               result += _urlManager.GetAbsoluteUrl(asset.CurrentPath, urlValue);
                                                           }
                                                           if (m.Groups["quote"].Success) {
