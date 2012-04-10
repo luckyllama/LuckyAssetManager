@@ -83,6 +83,7 @@
     <Compile Include="AssetManager General\ConditionalCommentTests.cs" />
     <Compile Include="AssetManager General\Assets\AssetReaders\MemoryAssetReaderTest.cs" />
     <Compile Include="AssetManager General\Processors\CssRelativePathProcessorTests.cs" />
+    <Compile Include="AssetManager General\Processors\YuiMinimizeProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssetManager General\Assets\Html\CssHtmlBuilderTests.cs" />
     <Compile Include="AssetManager General\Web\AssetHandlerTests.cs" />

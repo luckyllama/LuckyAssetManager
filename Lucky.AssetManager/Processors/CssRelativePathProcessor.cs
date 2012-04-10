@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -16,6 +17,8 @@ namespace Lucky.AssetManager.Processors {
         public CssRelativePathProcessor(IAbsoluteUrlManager urlManager) {
             _urlManager = urlManager;
         }
+
+        public CultureInfo CultureInfo { get; set; }
 
         public IEnumerable<IAsset> Process(IEnumerable<IAsset> assets) {
             var results = assets.Where(a => !a.IsProcessable || a is CssAsset == false).ToList();

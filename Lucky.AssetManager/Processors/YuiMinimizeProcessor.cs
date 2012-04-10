@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using Lucky.AssetManager.Assets;
 using Lucky.AssetManager.Assets.AssetReaders;
 
@@ -14,7 +16,11 @@ namespace Lucky.AssetManager.Processors {
                 if (asset is CssAsset && string.IsNullOrEmpty(newContent) == false) {
                     newContent = Yahoo.Yui.Compressor.CssCompressor.Compress(newContent);
                 } else {
-                    newContent = Yahoo.Yui.Compressor.JavaScriptCompressor.Compress(newContent);
+                    if (CultureInfo != null) {
+                        newContent = Yahoo.Yui.Compressor.JavaScriptCompressor.Compress(newContent, true, true, false, false, -1, Encoding.Default, CultureInfo);
+                    } else {
+                        newContent = Yahoo.Yui.Compressor.JavaScriptCompressor.Compress(newContent);
+                    }
                 }
 
                 asset.Reader = new MemoryAssetReader(asset.Reader.AssociatedFilePaths, newContent);
@@ -23,5 +29,7 @@ namespace Lucky.AssetManager.Processors {
 
             return results;
         }
+
+        public CultureInfo CultureInfo { get; set; }
     }
 }

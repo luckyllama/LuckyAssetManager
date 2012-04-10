@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Reflection;
 using Lucky.AssetManager.Processors;
 
@@ -82,7 +83,9 @@ namespace Lucky.AssetManager.Configuration {
                         }
                         object o = assembly.CreateInstance(type[0]);
                         if (o is IProcessor) {
-                            result.Add(o as IProcessor);
+                            var oProcessor = o as IProcessor;
+                            oProcessor.CultureInfo = new CultureInfo(processorData.CultureInfo, false);
+                            result.Add(oProcessor);
                         }
                     }
                     _processors = result;
@@ -126,6 +129,13 @@ namespace Lucky.AssetManager.Configuration {
         public string Type {
             get {
                 return this["type"] as string;
+            }
+        }
+
+        [ConfigurationProperty("cultureInfo", DefaultValue = "en-US", IsRequired = false)]
+        public string CultureInfo {
+            get {
+                return this["cultureInfo"] as string;
             }
         }
     }

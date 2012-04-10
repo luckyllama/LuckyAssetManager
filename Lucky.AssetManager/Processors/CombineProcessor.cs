@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Lucky.AssetManager.Assets;
@@ -35,5 +36,6 @@ namespace Lucky.AssetManager.Processors {
             return results;
         }
 
+        public CultureInfo CultureInfo { get; set; }
     }
 }

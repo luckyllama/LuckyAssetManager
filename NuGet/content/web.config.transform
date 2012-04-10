@@ -6,7 +6,7 @@
   </configSections>
 
   <lucky>
-    <assetManager debug="true">
+    <assetManager debug="false">
       <css>
         <processors>
           <!--RelativePathing must run before combining because combining loses the original paths of the files-->

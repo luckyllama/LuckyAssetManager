@@ -2,9 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>LuckyAssetManager</id>
-    <version>1.10.2</version>
+    <version>1.10.3</version>
     <releaseNotes>
-      Bug fix https://github.com/luckyllama/LuckyAssetManager/issues/5
+      Bug fix https://github.com/luckyllama/LuckyAssetManager/issues/7, debug now defaults to false
     </releaseNotes>
     <authors>frank hadder</authors>
     <owners>frank hadder</owners>
