@@ -63,29 +63,6 @@ namespace Lucky.AssetManager.Tests.Processors {
         }
 
         [Test]
-        public void JavascriptAsset_NoCultureInfo_RespectsCurrentThreadCulture() {
-            var currentThreadCulture = Thread.CurrentThread.CurrentCulture;
-            var currentThreadUiCulture = Thread.CurrentThread.CurrentUICulture;
-            var reader = GetReader("var stuff = {foo:0.9, faa:3};");
-            const string expected = "var stuff={foo:0,9,faa:3};";
-
-            var asset = new JavascriptAsset(_context, _settings) { Path = "", Reader = reader };
-            try {
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("it-IT");
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("it-IT");
-
-                var processer = new YuiMinimizeProcessor();
-
-                var results = processer.Process(new[] { asset });
-
-                Assert.That(results.Single().Reader.Content, Is.EqualTo(expected));
-            } finally {
-                Thread.CurrentThread.CurrentCulture = currentThreadCulture;
-                Thread.CurrentThread.CurrentUICulture = currentThreadUiCulture;
-            }
-        }
-
-        [Test]
         public void JavascriptAsset_DefaultCultureInfo_RespectsCultureInfo() {
             var reader = GetReader("var stuff = {foo:0.9, faa:3};");
             const string expected = "var stuff={foo:0.9,faa:3};";
@@ -93,6 +70,34 @@ namespace Lucky.AssetManager.Tests.Processors {
             var asset = new JavascriptAsset(_context, _settings) { Path = "", Reader = reader };
 
             var processer = new YuiMinimizeProcessor { CultureInfo = CultureInfo.CreateSpecificCulture("en-US") };
+
+            var results = processer.Process(new[] { asset });
+
+            Assert.That(results.Single().Reader.Content, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void JavascriptAsset_WithCultureInfoSpecialChars_ShowsSpecialChars() {
+            var reader = GetReader("var aäßáéíóú = 5;");
+            const string expected = "var aäßáéíóú=5;";
+
+            var asset = new JavascriptAsset(_context, _settings) { Path = "", Reader = reader };
+
+            var processer = new YuiMinimizeProcessor { CultureInfo = CultureInfo.CreateSpecificCulture("en-US") };
+
+            var results = processer.Process(new[] { asset });
+
+            Assert.That(results.Single().Reader.Content, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void JavascriptAsset_NoCultureInfoSpecialChars_ShowsSpecialChars() {
+            var reader = GetReader("var aäßáéíóú = 5;");
+            const string expected = "var aäßáéíóú=5;";
+
+            var asset = new JavascriptAsset(_context, _settings) { Path = "", Reader = reader };
+
+            var processer = new YuiMinimizeProcessor();
 
             var results = processer.Process(new[] { asset });
 

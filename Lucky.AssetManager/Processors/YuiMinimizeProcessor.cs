@@ -7,6 +7,13 @@ using Lucky.AssetManager.Assets.AssetReaders;
 
 namespace Lucky.AssetManager.Processors {
     public class YuiMinimizeProcessor : IProcessor {
+
+        public YuiMinimizeProcessor() {
+            // defaults
+            CultureInfo = new CultureInfo("en-US");
+            Encoding = Encoding.UTF8;
+        }
+
         public IEnumerable<IAsset> Process(IEnumerable<IAsset> assets) {
 
             var results = assets.Where(a => !a.IsProcessable).ToList();
@@ -16,11 +23,7 @@ namespace Lucky.AssetManager.Processors {
                 if (asset is CssAsset && string.IsNullOrEmpty(newContent) == false) {
                     newContent = Yahoo.Yui.Compressor.CssCompressor.Compress(newContent);
                 } else {
-                    if (CultureInfo != null) {
-                        newContent = Yahoo.Yui.Compressor.JavaScriptCompressor.Compress(newContent, true, true, false, false, -1, Encoding.Default, CultureInfo);
-                    } else {
-                        newContent = Yahoo.Yui.Compressor.JavaScriptCompressor.Compress(newContent);
-                    }
+                    newContent = Yahoo.Yui.Compressor.JavaScriptCompressor.Compress(newContent, true, true, false, false, -1, Encoding, CultureInfo);
                 }
 
                 asset.Reader = new MemoryAssetReader(asset.Reader.AssociatedFilePaths, newContent);
@@ -31,5 +34,6 @@ namespace Lucky.AssetManager.Processors {
         }
 
         public CultureInfo CultureInfo { get; set; }
+        public Encoding Encoding { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Globalization;
 using System.Reflection;
+using System.Text;
 using Lucky.AssetManager.Processors;
 
 namespace Lucky.AssetManager.Configuration {
@@ -84,8 +85,14 @@ namespace Lucky.AssetManager.Configuration {
                         object o = assembly.CreateInstance(type[0]);
                         if (o is IProcessor) {
                             var oProcessor = o as IProcessor;
-                            oProcessor.CultureInfo = new CultureInfo(processorData.CultureInfo, false);
-                            result.Add(oProcessor);
+                            if (o is YuiMinimizeProcessor) {
+                                var yuiMinimizerProcessor = o as YuiMinimizeProcessor;
+                                yuiMinimizerProcessor.CultureInfo = new CultureInfo(processorData.CultureInfo, false);
+                                yuiMinimizerProcessor.Encoding = Encoding.GetEncoding(processorData.Encoding);
+                                result.Add(yuiMinimizerProcessor);
+                            } else {
+                                result.Add(oProcessor);
+                            }
                         }
                     }
                     _processors = result;
@@ -137,6 +144,11 @@ namespace Lucky.AssetManager.Configuration {
             get {
                 return this["cultureInfo"] as string;
             }
+        }
+
+        [ConfigurationProperty("encoding", DefaultValue = "utf-8", IsRequired = false)]
+        public string Encoding {
+            get { return this["encoding"] as string; }
         }
     }
 }
