@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>LuckyAssetManager</id>
-    <version>1.10.4-beta</version>
+    <version>1.10.4-rc</version>
     <releaseNotes>
       Bug fixes for github issues 10, 12, and 13.
     </releaseNotes>
