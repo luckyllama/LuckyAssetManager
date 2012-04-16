@@ -63,12 +63,14 @@ namespace Lucky.AssetManager.Web {
 
         public void TryGzipEncodePage(HttpContextBase context) {
             string acceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
-            if (acceptEncoding.Contains("gzip")) {
-                context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
-                context.Response.AppendHeader("Content-Encoding", "gzip");
-            } else if (acceptEncoding.Contains("deflate")) {
-                context.Response.Filter = new System.IO.Compression.DeflateStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
-                context.Response.AppendHeader("Content-Encoding", "deflate");
+            if (acceptEncoding != null) {
+                if (acceptEncoding.Contains("gzip")) {
+                    context.Response.Filter = new System.IO.Compression.GZipStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
+                    context.Response.AppendHeader("Content-Encoding", "gzip");
+                } else if (acceptEncoding.Contains("deflate")) {
+                    context.Response.Filter = new System.IO.Compression.DeflateStream(context.Response.Filter, System.IO.Compression.CompressionMode.Compress);
+                    context.Response.AppendHeader("Content-Encoding", "deflate");
+                }
             }
         }
     }
