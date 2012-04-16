@@ -65,14 +65,14 @@ namespace Lucky.AssetManager.Processors {
 
     public class AbsoluteUrlManager : IAbsoluteUrlManager {
         public string GetAbsoluteUrl(string path, string relativeUrl) {
-            var fromUri = new Uri(HttpContext.Current.Server.MapPath("~/"));
-            var toUri = new Uri(new FileInfo(HttpContext.Current.Server.MapPath(path)).DirectoryName);
-
             if (string.IsNullOrEmpty(relativeUrl))
                 return relativeUrl;
 
             if (HttpContext.Current == null)
                 return relativeUrl;
+
+            var fromUri = new Uri(HttpContext.Current.Server.MapPath("~/"));
+            var toUri = new Uri(new FileInfo(HttpContext.Current.Server.MapPath(path)).DirectoryName);
 
             if (relativeUrl.StartsWith("~/"))
                 relativeUrl = VirtualPathUtility.ToAbsolute(relativeUrl);
@@ -80,7 +80,7 @@ namespace Lucky.AssetManager.Processors {
             var url = HttpContext.Current.Request.Url;
             var port = url.Port != 80 ? (":" + url.Port) : String.Empty;
 
-            return string.Format("{0}://{1}{2}/{3}/{4}", url.Scheme, url.Host, port, fromUri.MakeRelativeUri(toUri), relativeUrl);
+            return string.Format("{0}://{1}{2}/{3}/{4}", url.Scheme, url.Host, port, VirtualPathUtility.ToAbsolute("~/").TrimStart(new [] { '/' }) + fromUri.MakeRelativeUri(toUri), relativeUrl);
         }
     }
 }

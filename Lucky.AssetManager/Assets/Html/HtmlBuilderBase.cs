@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Web;
 using Lucky.AssetManager.Configuration;
 
 namespace Lucky.AssetManager.Assets.Html {
@@ -25,7 +26,7 @@ namespace Lucky.AssetManager.Assets.Html {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentException("The param 'key' must be a non-empty string.");
             }
-            var contentUrl = String.Format(Constants.HttpHandlerUrl, AssetType, key);
+            var contentUrl = VirtualPathUtility.ToAbsolute("~/") + String.Format(Constants.HttpHandlerUrl, AssetType, key);
             return BuildLink(contentUrl, asset);
         }
 
@@ -35,7 +36,7 @@ namespace Lucky.AssetManager.Assets.Html {
 
         private static void AppendConditionalCommentOpen(StringBuilder builder, IAsset asset) {
             var comment = String.Format(Constants.ConditionalCommentOpen, asset.ConditionalEquality.AsString(), asset.ConditionalBrowser.AsString());
-            comment.Replace("  ", " "); // get rid of double spacing in the case of Equality.EqualTo and Version.*
+            comment = comment.Replace("  ", " "); // get rid of double spacing in the case of Equality.EqualTo and Version.*
             builder.AppendLine(comment);
         }
 
