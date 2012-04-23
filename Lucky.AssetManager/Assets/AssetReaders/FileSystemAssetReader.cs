@@ -38,7 +38,7 @@ namespace Lucky.AssetManager.Assets.AssetReaders {
         }
 
         public override int GetHashCode() {
-            int hash = AssociatedFilePaths.Aggregate(0, (current, path) => current ^ path.GetHashCode());
+            int hash = AssociatedFilePaths.Where(path => !string.IsNullOrWhiteSpace(path)).Aggregate(0, (current, path) => current ^ path.GetHashCode());
             hash ^= _asset.Key.GetHashCode();
             return hash;
         }
