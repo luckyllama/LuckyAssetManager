@@ -78,7 +78,17 @@
         Assets.MasterJavascript("~/Scripts/jquery.validate.unobtrusive.js").Add();
         Assets.MasterJavascript("~/Scripts/master-page.js").Add();
     }
-
+    
+    @{
+        Assets.MasterJavascript("~/Scripts/jquery-1.5.1.js", "alt").Add();
+        Assets.MasterJavascript("~/Scripts/MicrosoftAjax.js", "alt").Add();
+        Assets.MasterJavascript("~/Scripts/MicrosoftMvcAjax.debug.js", "alt").Add();
+        Assets.MasterJavascript("~/Scripts/jquery.validate.js", "alt").Add();
+        Assets.MasterJavascript("~/Scripts/jquery.validate.unobtrusive.js", "alt").Add();
+        Assets.MasterJavascript("~/Scripts/master-page.js", "alt").Add();
+    }
+    
+    @Assets.RenderJavascript(assetGroup: "alt")
     @Assets.RenderJavascript()
 
     @MiniProfiler.RenderIncludes()

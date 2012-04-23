@@ -41,12 +41,12 @@ namespace Lucky.AssetManager.Tests.Assets.Html {
 
             _builder = new JavascriptHtmlBuilder();
             _conditionalAsset = new JavascriptAsset(_context, _settings) {
-                Path = "~/test-path.css",
+                Path = "test-path.css",
                 ConditionalBrowser = IE.Version.IE7,
                 ConditionalEquality = IE.Equality.LessThan
             };
             _asset = new JavascriptAsset(_context, _settings) {
-                Path = "~/test-path2.css",
+                Path = "test-path2.css",
             };
         }
 

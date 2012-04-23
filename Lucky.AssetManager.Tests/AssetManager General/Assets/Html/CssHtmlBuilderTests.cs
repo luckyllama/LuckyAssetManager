@@ -107,7 +107,7 @@ namespace Lucky.AssetManager.Tests.Assets.Html {
         public void BuildLink_ConditionalAsset_EqualTo_HasConditionalOpen() {
             var result = _builder.BuildLink("test", _conditionalAsset2);
 
-            const string expectedSubstring = "<!--[if  IE 8]>";
+            const string expectedSubstring = "<!--[if IE 8]>";
             Assert.That(result, Contains.Substring(expectedSubstring));
         }
 

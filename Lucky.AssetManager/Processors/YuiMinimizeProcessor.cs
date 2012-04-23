@@ -21,7 +21,7 @@ namespace Lucky.AssetManager.Processors {
 
         public IEnumerable<IAsset> Process(IEnumerable<IAsset> assets) {
 
-            var key = string.Join("_", assets.Select(a => a.Key.GetHashCode().ToString(CultureInfo.InvariantCulture)));
+            var key = string.Join("_", assets.Select(a => a.GetHashCode().ToString(CultureInfo.InvariantCulture)));
             if (_cache.Contains(key)) {
                 return _cache[key] as IEnumerable<IAsset>;
             }
